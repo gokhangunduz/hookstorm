@@ -5,10 +5,6 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "@gokhangunduz:registry": "https://npm.pkg.github.com"
-  },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
