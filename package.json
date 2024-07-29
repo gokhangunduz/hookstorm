@@ -8,8 +8,7 @@
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "publish": "npm run build && npm publish"
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "author": "Gökhan Gündüz",
   "license": "MIT",
