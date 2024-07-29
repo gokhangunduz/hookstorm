@@ -28,16 +28,3 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  release:
-    needs: publish-npm
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Create Release Tag
-        run: |
-          TAG_NAME=$(echo "${GITHUB_REF#refs/tags/}")
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
-          git push origin "$TAG_NAME"
