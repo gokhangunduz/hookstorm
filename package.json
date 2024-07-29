@@ -1,6 +1,6 @@
 {
   "name": "@gokhangunduz/hookstorm",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "hookstorm",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
