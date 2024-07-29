@@ -1,6 +1,6 @@
 {
   "name": "hookstorm",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "hookstorm",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
