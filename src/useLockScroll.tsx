@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 
-const useScrollLock = (initialLock: boolean = false) => {
-  const [isLocked, setIsLocked] = useState(initialLock);
+interface IuseScrollLock {
+  isLocked: boolean;
+  toggleScrollLock: (value?: boolean) => void;
+}
+
+const useScrollLock = (initialLock?: boolean): IuseScrollLock => {
+  const [isLocked, setIsLocked] = useState<boolean>(initialLock || false);
 
   useEffect(() => {
     document.body.style.overflow = isLocked ? "hidden" : "";
@@ -10,9 +15,11 @@ const useScrollLock = (initialLock: boolean = false) => {
     };
   }, [isLocked]);
 
-  const toggleScrollLock = (value?: boolean) => setIsLocked(value || !isLocked);
+  function toggleScrollLock(value?: boolean): void {
+    setIsLocked(value || !isLocked);
+  }
 
-  return [isLocked, toggleScrollLock] as const;
+  return { isLocked, toggleScrollLock };
 };
 
 export default useScrollLock;

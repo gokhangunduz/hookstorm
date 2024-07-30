@@ -5,23 +5,32 @@ interface IWindowSize {
   height: number;
 }
 
-const useWindowSize = () => {
+interface IuseWindowSize {
+  width: number;
+  height: number;
+}
+
+enum WindowEvent {
+  RESIZE = "resize",
+}
+
+const useWindowSize = (): IuseWindowSize => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({
     width: window.innerWidth,
     height: window.innerHeight,
   });
 
+  const handleResize = (): void => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
   useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
+    window.addEventListener(WindowEvent.RESIZE, handleResize);
 
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener(WindowEvent.RESIZE, handleResize);
   }, []);
 
   return windowSize;
