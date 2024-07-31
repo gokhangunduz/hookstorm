@@ -10,6 +10,23 @@ interface IuseHover {
   isHovered: boolean;
 }
 
+/**
+ * A custom hook to track if an element is being hovered over.
+ *
+ * @returns An object containing:
+ * - ref: A React ref object to attach to the target element.
+ * - isHovered: A boolean indicating whether the element is currently being hovered.
+ *
+ * @example
+ * // Usage example within a component
+ * const { ref, isHovered } = useHover();
+ *
+ * return (
+ *   <div ref={ref}>
+ *     {isHovered ? "Hovered!" : "Not hovered"}
+ *   </div>
+ * );
+ */
 const useHover = (): IuseHover => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const ref = useRef<Element>(null);
