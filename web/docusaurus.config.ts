@@ -31,7 +31,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl: "https://github.com/gokhangunduz/hookstorm/edit/main/",
+          editUrl: "https://github.com/gokhangunduz/hookstorm/edit/main/web/",
         },
         theme: {
           customCss: "./src/css/custom.css",
