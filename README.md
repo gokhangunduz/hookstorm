@@ -2,6 +2,10 @@
 
 `hookstorm` is a collection of customizable and reusable React hooks designed to simplify your development workflow. Whether you need to manage state, interact with the DOM, or handle complex logic, `hookstorm` provides a suite of hooks to help you build powerful and efficient React applications.
 
+## Documentation
+
+For detailed documentation on each hook, please refer to the [Documentation](https://hookstorm.vercel.app/).
+
 ## Features
 
 - **useCookie**: Manage cookies with ease.
@@ -57,10 +61,6 @@ const MyComponent = () => {
   );
 };
 ```
-
-## Documentation
-
-For detailed documentation on each hook, please refer to the [Documentation](https://github.com/gokhangunduz/hookstorm).
 
 ## Contributing
 
