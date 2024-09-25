@@ -16,6 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/gokhangunduz/hookstorm.git"
   },
+  "homepage": "https://hookstorm.vercel.app/",
   "keywords": [
     "react",
     "hooks",
