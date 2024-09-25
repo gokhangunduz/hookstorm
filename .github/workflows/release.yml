@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: latest
           registry-url: https://registry.npmjs.org/
+      - run: rm -rf web
       - run: npm install
       - run: npm run build
       - run: npm publish
@@ -32,6 +33,7 @@ jobs:
           node-version: latest
           registry-url: https://npm.pkg.github.com/
       - run: jq '.name = "@gokhangunduz/hookstorm"' package.json > tmp.json && mv tmp.json package.json
+      - run: rm -rf web
       - run: npm install
       - run: npm run build
       - run: npm publish
