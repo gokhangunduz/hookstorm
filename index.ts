@@ -13,6 +13,7 @@ import useScrollPosition from "./src/useScrollPosition";
 import useSessionStorage from "./src/useSessionStorage";
 import useToggle from "./src/useToggle";
 import useWindowSize from "./src/useWindowSize";
+import useClickOutside from "./src/useClickOutside";
 
 export {
   useCookie,
@@ -30,4 +31,5 @@ export {
   useSessionStorage,
   useToggle,
   useWindowSize,
+  useClickOutside,
 };
