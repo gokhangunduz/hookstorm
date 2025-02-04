@@ -1,8 +1,6 @@
-
 <p align="center">
   <img src="https://hookstorm.vercel.app/img/logo.svg" alt="Hookstorm Logo" width="256" height="256" />
 </p>
-
 
 # Hookstorm
 
@@ -29,6 +27,13 @@ For detailed documentation on each hook, please refer to the [Documentation](htt
 - **useSessionStorage**: Manage session storage with hooks.
 - **useToggle**: Toggle between true and false states.
 - **useWindowSize**: Track window size changes.
+- **useClickOutside**: Detect clicks outside a specified element.
+- **useOnlineStatus**: Track the user's internet connection status.
+- **usePageVisibility**: Detect when the user switches between browser tabs or minimizes the page.
+- **useIdle**: Detect if the user has been inactive for a specified duration.
+- **useMousePosition**: Track the user's mouse position.
+- **useDebounce**: Debounce function calls to improve performance.
+- **useGeoLocation**: Get the user's geolocation.
 
 ## Installation
 

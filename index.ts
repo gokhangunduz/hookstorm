@@ -14,6 +14,12 @@ import useSessionStorage from "./src/useSessionStorage";
 import useToggle from "./src/useToggle";
 import useWindowSize from "./src/useWindowSize";
 import useClickOutside from "./src/useClickOutside";
+import usePageVisibility from "./src/usePageVisibility";
+import useOnlineStatus from "./src/useOnlineStatus";
+import useDebounce from "./src/useDebounce";
+import useGeolocation from "./src/useGeolocation";
+import useIdle from "./src/useIdle";
+import useMousePosition from "./src/useMousePosition";
 
 export {
   useCookie,
@@ -32,4 +38,10 @@ export {
   useToggle,
   useWindowSize,
   useClickOutside,
+  usePageVisibility,
+  useOnlineStatus,
+  useDebounce,
+  useGeolocation,
+  useIdle,
+  useMousePosition,
 };
