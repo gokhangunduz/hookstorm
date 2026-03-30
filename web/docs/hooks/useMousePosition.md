@@ -38,4 +38,11 @@ export default function MouseComponent(): ReactElement {
 
 ### Explanation
 
-- The `useMousePosition` hook listens for mouse movements and updates the coordinates.
+In the example above:
+
+- The `useMousePosition` hook listens for `mousemove` events on the window and updates `x` and `y` coordinates in real time.
+- Both values start at `0` and update whenever the user moves the mouse.
+
+## Conclusion
+
+`useMousePosition` provides a straightforward way to track cursor coordinates, making it easy to build interactive UI elements that follow or react to the mouse pointer.

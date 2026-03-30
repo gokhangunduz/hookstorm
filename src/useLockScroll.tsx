@@ -30,7 +30,7 @@ const useScrollLock = (initialLock?: boolean): IuseScrollLock => {
   const [isLocked, setIsLocked] = useState<boolean>(initialLock || false);
 
   function toggleScrollLock(value?: boolean): void {
-    setIsLocked(value || !isLocked);
+    setIsLocked(value !== undefined ? value : !isLocked);
   }
 
   useEffect(() => {

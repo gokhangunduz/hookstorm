@@ -1,23 +1,414 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* ── Hero ──────────────────────────────────────────── */
 
-.heroBanner {
-  padding: 4rem 0;
+.hero {
+  padding: 7rem 0 5.5rem;
   text-align: center;
+  background: radial-gradient(
+    ellipse 90% 55% at 50% -5%,
+    rgba(99, 102, 241, 0.07) 0%,
+    transparent 70%
+  );
   position: relative;
-  overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+[data-theme="dark"] .hero {
+  background: radial-gradient(
+    ellipse 90% 55% at 50% -5%,
+    rgba(99, 102, 241, 0.13) 0%,
+    transparent 70%
+  );
 }
 
-.buttons {
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 100px;
+  padding: 0.3rem 0.875rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 2.25rem;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .heroBadge {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #777;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin: 0 0 1.25rem;
+  color: #111;
+}
+
+[data-theme="dark"] .heroTitle {
+  color: #f5f5f5;
+}
+
+.heroAccent {
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroSub {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: #666;
+  max-width: 520px;
+  margin: 0 auto 2.75rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+[data-theme="dark"] .heroSub {
+  color: #888;
+}
+
+.heroActions {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #111;
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 0.65rem 1.375rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.btnPrimary:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .btnPrimary {
+  background: #f5f5f5;
+  color: #111 !important;
+}
+
+[data-theme="dark"] .btnPrimary:hover {
+  background: #ffffff;
+}
+
+.installPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 0.875rem;
+}
+
+[data-theme="dark"] .installPill {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+.installPrompt {
+  color: #6366f1;
+  font-weight: 700;
+  user-select: none;
+}
+
+.installCmd {
+  color: #111;
+}
+
+[data-theme="dark"] .installCmd {
+  color: #e5e5e5;
+}
+
+/* ── Features ──────────────────────────────────────── */
+
+.features {
+  padding: 5rem 0;
+  border-top: 1px solid #eaeaea;
+}
+
+[data-theme="dark"] .features {
+  border-top-color: #1a1a1a;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .featuresGrid {
+  border-color: #1f1f1f;
+}
+
+.featureCard {
+  padding: 2rem 1.75rem;
+  background: #fff;
+  border-right: 1px solid #eaeaea;
+  transition: background 0.15s ease;
+}
+
+.featureCard:last-child {
+  border-right: none;
+}
+
+.featureCard:hover {
+  background: #fafafa;
+}
+
+[data-theme="dark"] .featureCard {
+  background: #111;
+  border-right-color: #1f1f1f;
+}
+
+[data-theme="dark"] .featureCard:hover {
+  background: #161616;
+}
+
+.featureIcon {
+  font-size: 1.375rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.featureTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+  color: #111;
+}
+
+[data-theme="dark"] .featureTitle {
+  color: #f0f0f0;
+}
+
+.featureDesc {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.65;
+}
+
+[data-theme="dark"] .featureDesc {
+  color: #777;
+}
+
+/* ── Quick Start ───────────────────────────────────── */
+
+.quickstart {
+  padding: 5rem 0 6.5rem;
+  border-top: 1px solid #eaeaea;
+}
+
+[data-theme="dark"] .quickstart {
+  border-top-color: #1a1a1a;
+}
+
+.quickstartInner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.quickstartText h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0 0 0.875rem;
+  color: #111;
+}
+
+[data-theme="dark"] .quickstartText h2 {
+  color: #f5f5f5;
+}
+
+.quickstartText p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.9375rem;
+  margin-bottom: 1.75rem;
+}
+
+[data-theme="dark"] .quickstartText p {
+  color: #888;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111 !important;
+  text-decoration: none !important;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnOutline:hover {
+  border-color: #6366f1;
+  color: #6366f1 !important;
+}
+
+[data-theme="dark"] .btnOutline {
+  border-color: #2a2a2a;
+  color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .btnOutline:hover {
+  border-color: #818cf8;
+  color: #818cf8 !important;
+}
+
+/* Code preview */
+.codeBlock {
+  background: #0d0d0d;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #222;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .codeBlock {
+  border-color: #1f1f1f;
+  box-shadow: 0 0 0 1px #1f1f1f;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.codeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  flex-shrink: 0;
+}
+
+.codeDot:nth-child(1) { background: #ff5f57; }
+.codeDot:nth-child(2) { background: #febc2e; }
+.codeDot:nth-child(3) { background: #28c840; }
+
+.codeFile {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #444;
+  font-family: ui-monospace, monospace;
+}
+
+.codePre {
+  margin: 0;
+  padding: 1.5rem 1.625rem;
+  background: transparent;
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  overflow-x: auto;
+  color: #ccc;
+}
+
+/* Syntax tokens */
+.cKw  { color: #c792ea; }
+.cFn  { color: #82aaff; }
+.cStr { color: #c3e88d; }
+.cNum { color: #f78c6c; }
+.cCmt { color: #546e7a; font-style: italic; }
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media screen and (max-width: 996px) {
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featureCard {
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  [data-theme="dark"] .featureCard {
+    border-bottom-color: #1f1f1f;
+  }
+
+  .featureCard:nth-child(2),
+  .featureCard:nth-child(4) {
+    border-right: none;
+  }
+
+  .quickstartInner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btnPrimary {
+    justify-content: center;
+  }
+
+  .installPill {
+    justify-content: center;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featureCard {
+    border-right: none;
+  }
 }

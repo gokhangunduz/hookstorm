@@ -2,18 +2,18 @@
 sidebar_position: 3
 ---
 
-# useScrollLock
+# useLockScroll
 
-The `useScrollLock` hook is a custom React hook used to manage the scroll lock state on the document body. It provides an easy way to lock or unlock scrolling, which can be useful for modals, dialogs, or any scenario where you need to control the scrolling behavior.
+The `useLockScroll` hook is a custom React hook used to manage the scroll lock state on the document body. It provides an easy way to lock or unlock scrolling, which can be useful for modals, dialogs, or any scenario where you need to control the scrolling behavior.
 
 ## Usage
 
 ### Installation
 
-You can import the `useScrollLock` hook from the `hookstorm` package like this:
+You can import the `useLockScroll` hook from the `hookstorm` package like this:
 
 ```typescript
-import { useScrollLock } from "hookstorm";
+import { useLockScroll } from "hookstorm";
 ```
 
 ### Parameters
@@ -22,21 +22,21 @@ import { useScrollLock } from "hookstorm";
 
 ### Return Values
 
-The `useScrollLock` hook returns the following object:
+The `useLockScroll` hook returns the following object:
 
 - **isLocked**: A boolean indicating whether the scroll is currently locked.
 - **toggleScrollLock**: A function to toggle the scroll lock state. If a value is provided, it sets the state to that value.
 
 ### Example Usage
 
-The following example demonstrates how to use the `useScrollLock` hook within a functional component:
+The following example demonstrates how to use the `useLockScroll` hook within a functional component:
 
 ```typescript
 import { ReactElement } from "react";
-import { useScrollLock } from "hookstorm";
+import { useLockScroll } from "hookstorm";
 
 export default function ScrollLockComponent(): ReactElement {
-  const { isLocked, toggleScrollLock } = useScrollLock();
+  const { isLocked, toggleScrollLock } = useLockScroll();
 
   return (
     <div>
@@ -52,11 +52,11 @@ export default function ScrollLockComponent(): ReactElement {
 
 In the example above:
 
-- The `useScrollLock` hook is used to manage the scroll lock state of the document body.
+- The `useLockScroll` hook is used to manage the scroll lock state of the document body.
 - The `isLocked` variable indicates whether the scroll is locked or not.
 - The `toggleScrollLock` function allows you to lock or unlock scrolling based on the value passed or by toggling the current state.
 - The component displays buttons to lock or unlock the scroll, and a message showing the current scroll lock state.
 
 ## Conclusion
 
-`useScrollLock` is a practical hook for controlling the scroll behavior of your application, especially when you need to manage scrolling during modal displays or other focused interactions.
+`useLockScroll` is a practical hook for controlling the scroll behavior of your application, especially when you need to manage scrolling during modal displays or other focused interactions.

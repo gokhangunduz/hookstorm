@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface IuseCountdown {
   timeLeft: number;
@@ -56,25 +56,25 @@ const useCountdown = (
     };
   }, [isActive, timeLeft, interval]);
 
+  const stop = useCallback(() => {
+    setIsActive(false);
+    if (timerRef.current !== null) window.clearInterval(timerRef.current);
+  }, []);
+
+  const start = useCallback(() => {
+    setIsActive(true);
+  }, []);
+
+  const reset = useCallback(() => {
+    stop();
+    setTimeLeft(startTime);
+  }, [stop, startTime]);
+
   useEffect(() => {
     if (stopTime !== undefined && timeLeft <= stopTime) {
       stop();
     }
-  }, [timeLeft, stopTime]);
-
-  function start() {
-    setIsActive(true);
-  }
-
-  function stop() {
-    setIsActive(false);
-    if (timerRef.current !== null) window.clearInterval(timerRef.current);
-  }
-
-  function reset() {
-    stop();
-    setTimeLeft(startTime);
-  }
+  }, [timeLeft, stopTime, stop]);
 
   return { timeLeft, start, stop, reset };
 };

@@ -10,9 +10,16 @@ The `useIdle` hook detects if the user has been inactive for a specified duratio
 
 ### Installation
 
+You can import the `useIdle` hook from the `hookstorm` package like this:
+
 ```typescript
 import { useIdle } from "hookstorm";
 ```
+
+### Parameters
+
+- **timeout**: (optional) The duration in milliseconds after which the user is considered idle. Defaults to `60000` (1 minute).
+- **events**: (optional) An array of DOM event names that reset the idle timer. Defaults to `["mousemove", "keydown", "click", "scroll", "touchstart"]`.
 
 ### Return Values
 
@@ -39,6 +46,12 @@ export default function IdleComponent(): ReactElement {
 
 ### Explanation
 
+In the example above:
+
 - The `useIdle` hook listens to user events and resets an inactivity timer.
 - After the specified `timeout` period, it sets `isIdle` to `true`.
 - You can manually call `resetIdle()` to reset the idle state.
+
+## Conclusion
+
+`useIdle` is a practical hook for detecting user inactivity, useful for session timeouts, screensavers, or any feature that should trigger after a period of no interaction.
