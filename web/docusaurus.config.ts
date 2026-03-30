@@ -63,10 +63,32 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      copyright: `Code is Poetry`,
+      links: [
+        {
+          title: "Docs",
+          items: [
+            { label: "Installation", to: "/docs/installation" },
+            { label: "Hooks", to: "/docs/hooks" },
+          ],
+        },
+        {
+          title: "Resources",
+          items: [
+            {
+              label: "GitHub",
+              href: "https://github.com/gokhangunduz/hookstorm",
+            },
+            {
+              label: "npm",
+              href: "https://www.npmjs.com/package/hookstorm",
+            },
+          ],
+        },
+      ],
+      copyright: `Made with ♥ in Ankara · ${new Date().getFullYear()} Hookstorm`,
     },
     prism: {
-      theme: prismThemes.oneLight,
+      theme: prismThemes.github,
       darkTheme: prismThemes.vsDark,
     },
   } satisfies Preset.ThemeConfig,
