@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://gokhangunduz.github.io/hookstorm/img/logo.dark.svg">
-    <img src="https://gokhangunduz.github.io/hookstorm/img/logo.svg" alt="Hookstorm Logo" width="96" height="96" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gokhangunduz/hookstorm/main/web/static/img/logo.dark.svg">
+    <img src="https://raw.githubusercontent.com/gokhangunduz/hookstorm/main/web/static/img/logo.svg" alt="Hookstorm Logo" width="96" height="96" />
   </picture>
 </p>
 
