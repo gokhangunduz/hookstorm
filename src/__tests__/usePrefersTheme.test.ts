@@ -7,7 +7,7 @@ describe("usePrefersTheme", () => {
 
   const mockMatchMedia = (matches: boolean) => {
     listeners = [];
-    vi.stubGlobal("matchMedia", (_query: string) => ({
+    vi.stubGlobal("matchMedia", () => ({
       matches,
       media: "(prefers-color-scheme: dark)",
       onchange: null,
