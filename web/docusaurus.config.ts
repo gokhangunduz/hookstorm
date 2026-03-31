@@ -6,13 +6,12 @@ const config: Config = {
   title: "Hookstorm",
   tagline:
     "Hookstorm is a collection of customizable, reusable React hooks that streamline state management, DOM interaction, and complex logic in React applications.",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.svg",
 
-  // Set the production url of your site here
-  url: "https://github.com",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  // Production URL — GitHub Pages default.
+  // Custom domain eklenince: url'i domain'e, baseUrl'i "/"'e çek ve web/static/CNAME dosyası oluştur.
+  url: "https://gokhangunduz.github.io",
+  baseUrl: "/hookstorm/",
 
   organizationName: "gokhangunduz", // Usually your GitHub org/user name.
   projectName: "hookstorm", // Usually your repo name.
@@ -46,6 +45,7 @@ const config: Config = {
       logo: {
         alt: "Hookstorm Logo",
         src: "img/logo.svg",
+        srcDark: "img/logo.dark.svg",
       },
       items: [
         {
@@ -72,6 +72,13 @@ const config: Config = {
           ],
         },
         {
+          title: "Library",
+          items: [
+            { label: "About", to: "/docs/about" },
+            { label: "Contact", to: "/docs/contact" },
+          ],
+        },
+        {
           title: "Resources",
           items: [
             {
@@ -84,8 +91,17 @@ const config: Config = {
             },
           ],
         },
+        {
+          title: "Legal",
+          items: [
+            {
+              label: "MIT License",
+              href: "https://github.com/gokhangunduz/hookstorm/blob/main/LICENSE",
+            },
+          ],
+        },
       ],
-      copyright: `Made with ♥ in Ankara · ${new Date().getFullYear()} Hookstorm`,
+      copyright: `© ${new Date().getFullYear()} Hookstorm · Made with <span style="color:#ef4444">♥</span> in Ankara`,
     },
     prism: {
       theme: prismThemes.github,

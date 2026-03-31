@@ -5,8 +5,8 @@ enum MouseEvent {
   LEAVE = "mouseleave",
 }
 
-interface IuseHover {
-  ref: React.RefObject<Element>;
+export interface UseHoverReturn {
+  ref: React.RefObject<Element | null>;
   isHovered: boolean;
 }
 
@@ -27,7 +27,7 @@ interface IuseHover {
  *   </div>
  * );
  */
-const useHover = (): IuseHover => {
+const useHover = (): UseHoverReturn => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const ref = useRef<Element>(null);
 

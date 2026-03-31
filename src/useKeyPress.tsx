@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-interface IuseKeyPress {
+export interface UseKeyPressReturn {
   key: string;
   isPressed: boolean;
 }
 
 /**
  * A custom hook to track if a specific key is currently pressed.
+ * Key matching is case-insensitive (e.g., "enter" and "Enter" both work).
  *
- * @param targetKey - The key to track (e.g., "Enter", "Escape").
+ * @param targetKey - The key to track (e.g., "Enter", "Escape", "a").
  *
  * @returns An object containing:
- * - key: The key that is being tracked.
+ * - key: The normalized key that is being tracked.
  * - isPressed: A boolean indicating whether the key is currently pressed.
  *
  * @example
- * // Usage example within a component
  * const { isPressed } = useKeyPress("Enter");
  *
  * return (
@@ -24,20 +24,23 @@ interface IuseKeyPress {
  *   </div>
  * );
  */
-const useKeyPress = (targetKey: string): IuseKeyPress => {
+const useKeyPress = (targetKey: string): UseKeyPressReturn => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
+  const normalizedKey = targetKey.toLowerCase();
 
-  const handleKeyDown = (event: KeyboardEvent): void => {
-    if (event.key === targetKey) {
-      setIsPressed(true);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent): void => {
+      if (event.key.toLowerCase() === normalizedKey) setIsPressed(true);
+    },
+    [normalizedKey]
+  );
 
-  const handleKeyUp = (event: KeyboardEvent): void => {
-    if (event.key === targetKey) {
-      setIsPressed(false);
-    }
-  };
+  const handleKeyUp = useCallback(
+    (event: KeyboardEvent): void => {
+      if (event.key.toLowerCase() === normalizedKey) setIsPressed(false);
+    },
+    [normalizedKey]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -47,7 +50,7 @@ const useKeyPress = (targetKey: string): IuseKeyPress => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [targetKey]);
+  }, [handleKeyDown, handleKeyUp]);
 
   return { key: targetKey, isPressed };
 };

@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-interface IuseScrollPosition {
+export interface UseScrollPositionReturn {
   scrollX: number;
   scrollY: number;
 }
 
+const isBrowser = typeof window !== "undefined";
+
 /**
  * A custom hook to get the current scroll position of the window.
+ * Updates are throttled to the display refresh rate via requestAnimationFrame.
+ * SSR-safe: returns zeros on the server.
  *
  * @returns An object containing:
  * - scrollX: The current horizontal scroll position.
@@ -22,22 +26,30 @@ interface IuseScrollPosition {
  *   </div>
  * );
  */
-const useScrollPosition = (): IuseScrollPosition => {
-  const [scrollPosition, setScrollPosition] = useState<IuseScrollPosition>({
-    scrollX: window.scrollX,
-    scrollY: window.scrollY,
+const useScrollPosition = (): UseScrollPositionReturn => {
+  const [scrollPosition, setScrollPosition] = useState<UseScrollPositionReturn>({
+    scrollX: isBrowser ? window.scrollX : 0,
+    scrollY: isBrowser ? window.scrollY : 0,
   });
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     const handleScroll = (): void => {
-      setScrollPosition({
-        scrollX: window.scrollX,
-        scrollY: window.scrollY,
+      if (rafRef.current !== null) return;
+
+      rafRef.current = window.requestAnimationFrame(() => {
+        setScrollPosition({ scrollX: window.scrollX, scrollY: window.scrollY });
+        rafRef.current = null;
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return scrollPosition;

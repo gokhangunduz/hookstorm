@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface IuseSessionStorage<T> {
+export interface UseSessionStorageReturn<T> {
   value: T | null;
   setValue: (value: T) => void;
   removeValue: () => void;
@@ -31,20 +31,32 @@ interface IuseSessionStorage<T> {
 const useSessionStorage = <T,>(
   key: string,
   initialValue: T
-): IuseSessionStorage<T> => {
+): UseSessionStorageReturn<T> => {
   const [value, setValue] = useState<T | null>(() => {
-    const storedValue = sessionStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : initialValue;
+    try {
+      const storedValue = sessionStorage.getItem(key);
+      return storedValue ? (JSON.parse(storedValue) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
   });
 
   function updateValue(newValue: T): void {
-    setValue(newValue);
-    sessionStorage.setItem(key, JSON.stringify(newValue));
+    try {
+      setValue(newValue);
+      sessionStorage.setItem(key, JSON.stringify(newValue));
+    } catch {
+      // Storage might be full or access denied — state is still updated
+    }
   }
 
   function removeValue(): void {
-    setValue(null);
-    sessionStorage.removeItem(key);
+    try {
+      setValue(null);
+      sessionStorage.removeItem(key);
+    } catch {
+      // Ignore removal errors
+    }
   }
 
   return { value, setValue: updateValue, removeValue };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface IusePageVisibility {
+export interface UsePageVisibilityReturn {
   isVisible: boolean;
 }
 
@@ -15,7 +15,7 @@ interface IusePageVisibility {
  *
  * return <p>{isVisible ? "Tab is active" : "Tab is inactive"}</p>;
  */
-const usePageVisibility = (): IusePageVisibility => {
+const usePageVisibility = (): UsePageVisibilityReturn => {
   const [isVisible, setIsVisible] = useState(!document.hidden);
 
   useEffect(() => {

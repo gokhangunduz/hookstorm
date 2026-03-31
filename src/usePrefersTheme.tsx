@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-interface IusePrefersTheme {
+export interface UsePrefersThemeReturn {
   theme: "dark" | "light";
 }
 
@@ -19,7 +19,7 @@ interface IusePrefersTheme {
  *   </div>
  * );
  */
-const usePrefersTheme = (): IusePrefersTheme => {
+const usePrefersTheme = (): UsePrefersThemeReturn => {
   const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {

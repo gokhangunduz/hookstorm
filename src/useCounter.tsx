@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface IuseCounter {
+export interface UseCounterReturn {
   count: number;
   increment: (amount?: number) => void;
   decrement: (amount?: number) => void;
@@ -31,7 +31,7 @@ interface IuseCounter {
  *   </div>
  * );
  */
-const useCounter = (initialValue?: number): IuseCounter => {
+const useCounter = (initialValue?: number): UseCounterReturn => {
   const [count, setCount] = useState<number>(initialValue || 0);
 
   function increment(amount?: number): void {

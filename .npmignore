@@ -1,0 +1,13 @@
+src/
+web/
+.github/
+.claude/
+dist/esm/__tests__/
+dist/cjs/__tests__/
+vitest.config.ts
+eslint.config.mjs
+.prettierrc
+tsconfig.json
+CHANGELOG.md
+*.test.ts
+*.test.tsx

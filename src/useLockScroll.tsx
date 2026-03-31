@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 
-interface IuseScrollLock {
+export interface UseLockScrollReturn {
   isLocked: boolean;
   toggleScrollLock: (value?: boolean) => void;
 }
 
+// Module-level counter so multiple hook instances share state safely.
+// When any instance locks scroll the counter goes above 0; when all unlock it returns to 0.
+let lockCount = 0;
+
 /**
  * A custom hook to manage the scroll lock state on the document body.
+ * Safe to use in multiple components simultaneously — scroll is only restored
+ * once every consumer has unlocked.
  *
  * @param initialLock - The initial scroll lock state (default is false).
  *
@@ -15,8 +21,7 @@ interface IuseScrollLock {
  * - toggleScrollLock: A function to toggle the scroll lock state. If a value is provided, it sets the state to that value.
  *
  * @example
- * // Usage example within a component
- * const { isLocked, toggleScrollLock } = useScrollLock();
+ * const { isLocked, toggleScrollLock } = useLockScroll();
  *
  * return (
  *   <div>
@@ -26,21 +31,30 @@ interface IuseScrollLock {
  *   </div>
  * );
  */
-const useScrollLock = (initialLock?: boolean): IuseScrollLock => {
+const useLockScroll = (initialLock?: boolean): UseLockScrollReturn => {
   const [isLocked, setIsLocked] = useState<boolean>(initialLock || false);
 
   function toggleScrollLock(value?: boolean): void {
-    setIsLocked(value !== undefined ? value : !isLocked);
+    setIsLocked((prev) => (value !== undefined ? value : !prev));
   }
 
   useEffect(() => {
-    document.body.style.overflow = isLocked ? "hidden" : "";
+    if (isLocked) {
+      lockCount += 1;
+      document.body.style.overflow = "hidden";
+    }
+
     return () => {
-      document.body.style.overflow = "";
+      if (isLocked) {
+        lockCount = Math.max(0, lockCount - 1);
+        if (lockCount === 0) {
+          document.body.style.overflow = "";
+        }
+      }
     };
   }, [isLocked]);
 
   return { isLocked, toggleScrollLock };
 };
 
-export default useScrollLock;
+export default useLockScroll;

@@ -1,28 +1,21 @@
 import { useState, useEffect } from "react";
 
-interface IWindowSize {
+export interface UseWindowSizeReturn {
   width: number;
   height: number;
 }
 
-interface IuseWindowSize {
-  width: number;
-  height: number;
-}
-
-enum WindowEvent {
-  RESIZE = "resize",
-}
+const isBrowser = typeof window !== "undefined";
 
 /**
  * A custom hook to track the current window size.
+ * SSR-safe: returns zeros on the server.
  *
  * @returns An object containing:
  * - width: The current width of the window.
  * - height: The current height of the window.
  *
  * @example
- * // Usage example within a component
  * const { width, height } = useWindowSize();
  *
  * return (
@@ -32,23 +25,21 @@ enum WindowEvent {
  *   </div>
  * );
  */
-const useWindowSize = (): IuseWindowSize => {
-  const [windowSize, setWindowSize] = useState<IWindowSize>({
-    width: window.innerWidth,
-    height: window.innerHeight,
+const useWindowSize = (): UseWindowSizeReturn => {
+  const [windowSize, setWindowSize] = useState<UseWindowSizeReturn>({
+    width: isBrowser ? window.innerWidth : 0,
+    height: isBrowser ? window.innerHeight : 0,
   });
 
-  const handleResize = (): void => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  };
-
   useEffect(() => {
-    window.addEventListener(WindowEvent.RESIZE, handleResize);
+    if (!isBrowser) return;
 
-    return () => window.removeEventListener(WindowEvent.RESIZE, handleResize);
+    const handleResize = (): void => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return windowSize;

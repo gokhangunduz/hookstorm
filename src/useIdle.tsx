@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
-interface IuseIdle {
+export interface UseIdleReturn {
   isIdle: boolean;
   resetIdle: () => void;
 }
 
+// Stable default event list defined outside the hook to avoid new array
+// references on every render, which would cause the effect to re-run endlessly.
+const DEFAULT_EVENTS = ["mousemove", "keydown", "click", "scroll", "touchstart"] as const;
+
 /**
- * A highly optimized custom hook to detect user inactivity.
+ * A custom hook to detect user inactivity.
  *
  * @param timeout - The duration (in milliseconds) after which the user is considered idle.
  * @param events - The events that should reset the idle timer.
@@ -27,24 +31,26 @@ interface IuseIdle {
  */
 const useIdle = (
   timeout: number = 60000,
-  events: string[] = ["mousemove", "keydown", "click", "scroll", "touchstart"]
-): IuseIdle => {
+  events: readonly string[] = DEFAULT_EVENTS
+): UseIdleReturn => {
   const [isIdle, setIsIdle] = useState(false);
   const timerRef = useRef<number | null>(null);
+  // Keep timeout in a ref so resetIdle doesn't need to be recreated when it changes
+  const timeoutRef = useRef(timeout);
+  timeoutRef.current = timeout;
 
   const resetIdle = useCallback(() => {
     setIsIdle(false);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setIsIdle(true), timeout);
-  }, [timeout]);
+    if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => setIsIdle(true), timeoutRef.current);
+  }, []);
 
   useEffect(() => {
     resetIdle();
-
     events.forEach((event) => window.addEventListener(event, resetIdle));
     return () => {
       events.forEach((event) => window.removeEventListener(event, resetIdle));
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (timerRef.current !== null) window.clearTimeout(timerRef.current);
     };
   }, [resetIdle, events]);
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface IuseOnlineStatus {
+export interface UseOnlineStatusReturn {
   isOnline: boolean;
 }
 
@@ -15,7 +15,7 @@ interface IuseOnlineStatus {
  *
  * return <p>{isOnline ? "Online" : "Offline"}</p>;
  */
-const useOnlineStatus = (): IuseOnlineStatus => {
+const useOnlineStatus = (): UseOnlineStatusReturn => {
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
 
   useEffect(() => {

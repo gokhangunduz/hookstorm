@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface IuseLocalStorage<T> {
+export interface UseLocalStorageReturn<T> {
   value: T | null;
   setValue: (value: T) => void;
   removeValue: () => void;
@@ -31,20 +31,32 @@ interface IuseLocalStorage<T> {
 const useLocalStorage = <T,>(
   key: string,
   initialValue: T
-): IuseLocalStorage<T> => {
+): UseLocalStorageReturn<T> => {
   const [value, setValue] = useState<T | null>(() => {
-    const storedValue = localStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : initialValue;
+    try {
+      const storedValue = localStorage.getItem(key);
+      return storedValue ? (JSON.parse(storedValue) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
   });
 
   function updateValue(newValue: T): void {
-    setValue(newValue);
-    localStorage.setItem(key, JSON.stringify(newValue));
+    try {
+      setValue(newValue);
+      localStorage.setItem(key, JSON.stringify(newValue));
+    } catch {
+      // Storage might be full or access denied — state is still updated
+    }
   }
 
   function removeValue(): void {
-    setValue(null);
-    localStorage.removeItem(key);
+    try {
+      setValue(null);
+      localStorage.removeItem(key);
+    } catch {
+      // Ignore removal errors
+    }
   }
 
   return { value, setValue: updateValue, removeValue };

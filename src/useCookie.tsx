@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface IuseCookie {
+export interface UseCookieReturn {
   value: string | null;
   setValue: (value: string, options?: CookieOptions) => void;
   removeValue: (options?: CookieOptions) => void;
@@ -9,10 +9,13 @@ interface IuseCookie {
 interface CookieOptions {
   expires?: number; // Expiry time in days
   path?: string;
+  sameSite?: "Strict" | "Lax" | "None";
+  secure?: boolean;
 }
 
 /**
  * A custom hook to manage a cookie.
+ * Values are automatically URL-encoded/decoded to handle special characters safely.
  *
  * @param key - The key of the cookie.
  * @param initialValue - The initial value to use if no cookie is found.
@@ -33,30 +36,44 @@ interface CookieOptions {
  *   </div>
  * );
  */
-const useCookie = (key: string, initialValue: string): IuseCookie => {
-  const [value, setValue] = useState<string | null>(() => {
-    const cookieValue = document.cookie
+const useCookie = (key: string, initialValue: string): UseCookieReturn => {
+  const readCookie = (): string | null => {
+    const match = document.cookie
       .split("; ")
-      .find((row) => row.startsWith(`${key}=`));
-    return cookieValue ? cookieValue.split("=")[1] : initialValue;
-  });
+      .find((row) => row.startsWith(`${encodeURIComponent(key)}=`));
+    if (!match) return null;
+    try {
+      return decodeURIComponent(match.split("=").slice(1).join("="));
+    } catch {
+      return null;
+    }
+  };
 
-  const setCookie = (value: string, options: CookieOptions = {}): void => {
-    let cookieString = `${key}=${value}`;
-    if (options.expires) {
+  const [value, setValue] = useState<string | null>(
+    () => readCookie() ?? initialValue
+  );
+
+  const setCookie = (newValue: string, options: CookieOptions = {}): void => {
+    let cookieString = `${encodeURIComponent(key)}=${encodeURIComponent(newValue)}`;
+
+    if (options.expires !== undefined) {
       const date = new Date();
       date.setTime(date.getTime() + options.expires * 24 * 60 * 60 * 1000);
       cookieString += `; expires=${date.toUTCString()}`;
     }
-    if (options.path) {
-      cookieString += `; path=${options.path}`;
-    }
+
+    cookieString += `; path=${options.path ?? "/"}`;
+
+    if (options.sameSite) cookieString += `; SameSite=${options.sameSite}`;
+    if (options.secure) cookieString += `; Secure`;
+
     document.cookie = cookieString;
-    setValue(value);
+    setValue(newValue);
   };
 
   const removeCookie = (options: CookieOptions = {}): void => {
-    setCookie("", { expires: -1, ...options });
+    setCookie("", { ...options, expires: -1 });
+    setValue(null);
   };
 
   return { value, setValue: setCookie, removeValue: removeCookie };

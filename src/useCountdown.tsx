@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-interface IuseCountdown {
+export interface UseCountdownReturn {
   timeLeft: number;
   start: () => void;
   stop: () => void;
@@ -22,9 +22,6 @@ interface IuseCountdown {
  *
  * @example
  * const { timeLeft, start, stop, reset } = useCountdown(60, 1, 10);
- * // startTime = 60 seconds
- * // interval = 1 second
- * // stopTime = 10 seconds (optional, countdown stops automatically at this value)
  *
  * return (
  *   <div>
@@ -37,44 +34,59 @@ interface IuseCountdown {
  */
 const useCountdown = (
   startTime: number,
-  interval: number,
+  interval: number = 1,
   stopTime?: number
-): IuseCountdown => {
+): UseCountdownReturn => {
   const [timeLeft, setTimeLeft] = useState<number>(startTime);
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const isActiveRef = useRef<boolean>(false);
   const timerRef = useRef<number | null>(null);
+  // Keep stopTime in a ref so the interval callback always has the latest value
+  const stopTimeRef = useRef<number | undefined>(stopTime);
+  stopTimeRef.current = stopTime;
 
-  useEffect(() => {
-    if (!isActive || timeLeft <= 0) return;
-
-    timerRef.current = window.setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, interval * 1000); // Convert interval from seconds to milliseconds
-
-    return () => {
-      if (timerRef.current !== null) window.clearInterval(timerRef.current);
-    };
-  }, [isActive, timeLeft, interval]);
+  const clearTimer = useCallback(() => {
+    if (timerRef.current !== null) {
+      window.clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
 
   const stop = useCallback(() => {
-    setIsActive(false);
-    if (timerRef.current !== null) window.clearInterval(timerRef.current);
-  }, []);
+    isActiveRef.current = false;
+    clearTimer();
+  }, [clearTimer]);
 
   const start = useCallback(() => {
-    setIsActive(true);
-  }, []);
+    if (isActiveRef.current) return;
+    isActiveRef.current = true;
+
+    timerRef.current = window.setInterval(() => {
+      setTimeLeft((prev) => {
+        const next = prev - 1;
+        const hitStop =
+          stopTimeRef.current !== undefined && next <= stopTimeRef.current;
+
+        if (next <= 0 || hitStop) {
+          isActiveRef.current = false;
+          window.clearInterval(timerRef.current!);
+          timerRef.current = null;
+          return next <= 0 ? 0 : next;
+        }
+
+        return next;
+      });
+    }, interval * 1000);
+  }, [interval]);
 
   const reset = useCallback(() => {
     stop();
     setTimeLeft(startTime);
   }, [stop, startTime]);
 
+  // Cleanup on unmount
   useEffect(() => {
-    if (stopTime !== undefined && timeLeft <= stopTime) {
-      stop();
-    }
-  }, [timeLeft, stopTime, stop]);
+    return () => clearTimer();
+  }, [clearTimer]);
 
   return { timeLeft, start, stop, reset };
 };

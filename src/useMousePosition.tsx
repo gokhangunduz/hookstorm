@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-interface IuseMousePosition {
+export interface UseMousePositionReturn {
   x: number;
   y: number;
 }
 
 /**
- * A custom hook to track mouse position.
+ * A custom hook to track mouse position using requestAnimationFrame for performance.
+ * Updates are throttled to the display refresh rate instead of firing on every mousemove event.
  *
  * @returns An object containing:
  * - x: The x-coordinate of the mouse.
@@ -17,16 +18,28 @@ interface IuseMousePosition {
  *
  * return <p>Mouse Position: {x}, {y}</p>;
  */
-const useMousePosition = (): IuseMousePosition => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+const useMousePosition = (): UseMousePositionReturn => {
+  const [position, setPosition] = useState<UseMousePositionReturn>({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+  const pendingRef = useRef<UseMousePositionReturn | null>(null);
 
   useEffect(() => {
-    const updatePosition = (event: MouseEvent) => {
-      setPosition({ x: event.clientX, y: event.clientY });
+    const handleMove = (event: MouseEvent): void => {
+      pendingRef.current = { x: event.clientX, y: event.clientY };
+
+      if (rafRef.current !== null) return;
+
+      rafRef.current = window.requestAnimationFrame(() => {
+        if (pendingRef.current) setPosition(pendingRef.current);
+        rafRef.current = null;
+      });
     };
 
-    window.addEventListener("mousemove", updatePosition);
-    return () => window.removeEventListener("mousemove", updatePosition);
+    window.addEventListener("mousemove", handleMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return position;

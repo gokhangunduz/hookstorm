@@ -1,9 +1,33 @@
+# Build output
 /dist
 
+# Dependencies
 /node_modules
-package-lock.json
-
 web/node_modules
+
+# Lock files (not committed — consumers use their own)
+package-lock.json
 web/package-lock.json
+
+# Docusaurus
 web/.docusaurus
 web/build
+
+# Test coverage
+/coverage
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude AI assistant context (local only)
+.claude/
+
+# Temporary / one-off files placed in root
+logo.svg

@@ -1,14 +1,29 @@
 {
   "name": "hookstorm",
-  "version": "0.0.33",
-  "description": "hookstorm",
+  "version": "1.0.0",
+  "description": "A collection of production-ready, zero-dependency React hooks for state, DOM, storage, network, and utilities.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "sideEffects": false,
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "lint": "eslint src index.ts",
+    "lint:fix": "eslint src index.ts --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "release": "release-it"
   },
   "author": "Gökhan Gündüz",
   "license": "MIT",
@@ -16,16 +31,47 @@
     "type": "git",
     "url": "git+https://github.com/gokhangunduz/hookstorm.git"
   },
-  "homepage": "https://hookstorm.vercel.app/",
+  "homepage": "https://gokhangunduz.github.io/hookstorm/",
   "keywords": [
     "react",
     "hooks",
-    "hookstorm"
+    "hookstorm",
+    "react-hooks",
+    "custom-hooks",
+    "typescript",
+    "state-management",
+    "dom-hooks",
+    "browser-hooks",
+    "use-toggle",
+    "use-debounce",
+    "use-local-storage",
+    "use-window-size",
+    "utilities",
+    "zero-dependencies",
+    "tree-shakeable"
   ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.5.4"
+    "@release-it/conventional-changelog": "^10.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.2.14",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "@vitest/coverage-v8": "^3.1.2",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.5.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "release-it": "^18.1.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.1.2"
   }
 }

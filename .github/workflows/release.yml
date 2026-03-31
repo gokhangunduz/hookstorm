@@ -6,15 +6,27 @@ on:
       - "*.*.*"
 
 jobs:
-  publish-npm:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 20
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  publish-npm:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: rm -rf web
       - run: npm install
       - run: npm run build
       - run: npm publish
@@ -22,18 +34,18 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-gpr:
+    needs: validate
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: jq '.name = "@gokhangunduz/hookstorm"' package.json > tmp.json && mv tmp.json package.json
-      - run: rm -rf web
       - run: npm install
       - run: npm run build
       - run: npm publish

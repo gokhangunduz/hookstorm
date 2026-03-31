@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 
-interface IuseDocumentTitle {
+export interface UseDocumentTitleReturn {
   title: string;
   setDocumentTitle: (newTitle: string) => void;
 }
 
+const isBrowser = typeof document !== "undefined";
+
 /**
  * A custom hook to manage the document title.
+ * SSR-safe: no-op on the server.
  *
  * @returns An object containing:
  * - title: The current document title.
@@ -14,25 +17,23 @@ interface IuseDocumentTitle {
  *
  * @example
  * const { title, setDocumentTitle } = useDocumentTitle();
- * useEffect(() => {
- *   setDocumentTitle('New Page Title');
- * }, []);
  *
  * return (
  *   <div>
  *     <p>Current Title: {title}</p>
- *     <p>The document title will be updated to 'New Page Title'.</p>
+ *     <button onClick={() => setDocumentTitle("New Title")}>Change Title</button>
  *   </div>
  * );
  */
-const useDocumentTitle = (): IuseDocumentTitle => {
-  const [title, setTitle] = useState<string>(document.title);
+const useDocumentTitle = (): UseDocumentTitleReturn => {
+  const [title, setTitle] = useState<string>(isBrowser ? document.title : "");
 
   useEffect(() => {
+    if (!isBrowser) return;
     document.title = title;
   }, [title]);
 
-  const setDocumentTitle = (newTitle: string) => {
+  const setDocumentTitle = (newTitle: string): void => {
     setTitle(newTitle);
   };
 

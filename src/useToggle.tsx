@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface IuseToggle {
+export interface UseToggleReturn {
   value: boolean;
   toggle: (newValue?: boolean) => void;
 }
@@ -18,7 +18,7 @@ interface IuseToggle {
  * // Usage example within a component
  * const { value, toggle } = useToggle();
  */
-const useToggle = (initialValue: boolean = false): IuseToggle => {
+const useToggle = (initialValue: boolean = false): UseToggleReturn => {
   const [value, setToggle] = useState<boolean>(initialValue);
 
   /**
