@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-slug: /hooks
 ---
 
 # Hooks
@@ -11,44 +10,44 @@ Browse all available hooks in Hookstorm, organized by category.
 
 | Hook | Description |
 | --- | --- |
-| [useToggle](./useToggle) | Toggle a boolean with an optional forced value |
-| [useCounter](./useCounter) | Increment, decrement, and reset a counter |
-| [usePrevious](./usePrevious) | Access the previous value of any state or prop |
-| [useDebounce](./useDebounce) | Delay a value update until input settles |
+| [useToggle](/docs/hooks/useToggle) | Toggle a boolean with an optional forced value |
+| [useCounter](/docs/hooks/useCounter) | Increment, decrement, and reset a counter |
+| [usePrevious](/docs/hooks/usePrevious) | Access the previous value of any state or prop |
+| [useDebounce](/docs/hooks/useDebounce) | Delay a value update until input settles |
 
 ## DOM & Browser
 
 | Hook | Description |
 | --- | --- |
-| [useWindowSize](./useWindowSize) | Track current window width and height |
-| [useScrollPosition](./useScrollPosition) | Read the current scroll position |
-| [useMousePosition](./useMousePosition) | Track cursor position in real time |
-| [useHover](./useHover) | Detect hover state on any element |
-| [useClickOutside](./useClickOutside) | Detect clicks outside a referenced element |
-| [useDocumentTitle](./useDocumentTitle) | Dynamically update the browser tab title |
-| [useLockScroll](./useLockScroll) | Prevent or restore page scroll |
-| [useKeyPress](./useKeyPress) | Detect when a specific key is held down |
+| [useWindowSize](/docs/hooks/useWindowSize) | Track current window width and height |
+| [useScrollPosition](/docs/hooks/useScrollPosition) | Read the current scroll position |
+| [useMousePosition](/docs/hooks/useMousePosition) | Track cursor position in real time |
+| [useHover](/docs/hooks/useHover) | Detect hover state on any element |
+| [useClickOutside](/docs/hooks/useClickOutside) | Detect clicks outside a referenced element |
+| [useDocumentTitle](/docs/hooks/useDocumentTitle) | Dynamically update the browser tab title |
+| [useLockScroll](/docs/hooks/useLockScroll) | Prevent or restore page scroll |
+| [useKeyPress](/docs/hooks/useKeyPress) | Detect when a specific key is held down |
 
 ## Storage
 
 | Hook | Description |
 | --- | --- |
-| [useLocalStorage](./useLocalStorage) | `localStorage` with a React state interface |
-| [useSessionStorage](./useSessionStorage) | `sessionStorage` with a React state interface |
-| [useCookie](./useCookie) | Read, write, and remove cookies |
+| [useLocalStorage](/docs/hooks/useLocalStorage) | `localStorage` with a React state interface |
+| [useSessionStorage](/docs/hooks/useSessionStorage) | `sessionStorage` with a React state interface |
+| [useCookie](/docs/hooks/useCookie) | Read, write, and remove cookies |
 
 ## Network & Device
 
 | Hook | Description |
 | --- | --- |
-| [useOnlineStatus](./useOnlineStatus) | Detect online / offline status |
-| [useGeoLocation](./useGeoLocation) | Request and track user geolocation |
-| [usePageVisibility](./usePageVisibility) | Know when the user switches away from the tab |
-| [usePrefersTheme](./usePrefersTheme) | Read the OS `prefers-color-scheme` setting |
+| [useOnlineStatus](/docs/hooks/useOnlineStatus) | Detect online / offline status |
+| [useGeoLocation](/docs/hooks/useGeoLocation) | Request and track user geolocation |
+| [usePageVisibility](/docs/hooks/usePageVisibility) | Know when the user switches away from the tab |
+| [usePrefersTheme](/docs/hooks/usePrefersTheme) | Read the OS `prefers-color-scheme` setting |
 
 ## Timers & Async
 
 | Hook | Description |
 | --- | --- |
-| [useCountdown](./useCountdown) | Countdown timer with start, stop, and reset |
-| [useIdle](./useIdle) | Detect inactivity after a configurable timeout |
+| [useCountdown](/docs/hooks/useCountdown) | Countdown timer with start, stop, and reset |
+| [useIdle](/docs/hooks/useIdle) | Detect inactivity after a configurable timeout |
