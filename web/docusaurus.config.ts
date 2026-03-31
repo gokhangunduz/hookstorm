@@ -8,13 +8,11 @@ const config: Config = {
     "Hookstorm is a collection of customizable, reusable React hooks that streamline state management, DOM interaction, and complex logic in React applications.",
   favicon: "img/favicon.svg",
 
-  // Production URL — GitHub Pages default.
-  // Custom domain eklenince: url'i domain'e, baseUrl'i "/"'e çek ve web/static/CNAME dosyası oluştur.
   url: "https://gokhangunduz.github.io",
   baseUrl: "/hookstorm/",
 
-  organizationName: "gokhangunduz", // Usually your GitHub org/user name.
-  projectName: "hookstorm", // Usually your repo name.
+  organizationName: "gokhangunduz",
+  projectName: "hookstorm",
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -55,6 +53,11 @@ const config: Config = {
           label: "Docs",
         },
         {
+          to: "/docs/changelog",
+          position: "left",
+          label: "Changelog",
+        },
+        {
           href: "https://github.com/gokhangunduz/hookstorm",
           label: "GitHub",
           position: "right",
@@ -69,6 +72,7 @@ const config: Config = {
           items: [
             { label: "Installation", to: "/docs/installation" },
             { label: "Hooks", to: "/docs/hooks" },
+            { label: "Changelog", to: "/docs/changelog" },
           ],
         },
         {

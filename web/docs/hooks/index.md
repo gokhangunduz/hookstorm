@@ -51,3 +51,7 @@ Browse all available hooks in Hookstorm, organized by category.
 | --- | --- |
 | [useCountdown](/docs/hooks/useCountdown) | Countdown timer with start, stop, and reset |
 | [useIdle](/docs/hooks/useIdle) | Detect inactivity after a configurable timeout |
+| [useAsync](/docs/hooks/useAsync) | Manage async function lifecycle with loading, data, and error |
+| [useInterval](/docs/hooks/useInterval) | Declarative `setInterval` with pause support |
+| [useTimeout](/docs/hooks/useTimeout) | Declarative `setTimeout` with reset and clear |
+| [useMounted](/docs/hooks/useMounted) | Ref-based mount guard for safe async state updates |

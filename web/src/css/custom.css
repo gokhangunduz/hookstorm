@@ -198,7 +198,7 @@
 
 /* Sidebar version badge */
 .theme-doc-sidebar-container::after {
-  content: "v0.0.33";
+  content: "v1.0.1";
   display: block;
   position: absolute;
   bottom: 1.25rem;
@@ -219,9 +219,56 @@
   position: relative;
 }
 
-/* Sidebar top brand strip */
-.theme-doc-sidebar-container .navbar-sidebar__brand {
-  display: none;
+/* Hide brand strip inside desktop sidebar (desktop only) */
+@media (min-width: 997px) {
+  .theme-doc-sidebar-container .navbar-sidebar__brand {
+    display: none;
+  }
+}
+
+/* ─────────────────────────────── Mobile Sidebar */
+
+@media (max-width: 996px) {
+  .navbar-sidebar {
+    background-color: var(--ifm-background-color) !important;
+    z-index: 300;
+  }
+
+  [data-theme="dark"] .navbar-sidebar {
+    background-color: #0d0d10 !important;
+  }
+
+  .navbar-sidebar__brand {
+    display: flex !important;
+    align-items: center;
+    height: var(--ifm-navbar-height);
+    padding: 0 1rem;
+    background-color: var(--ifm-background-color) !important;
+    border-bottom: 1px solid var(--hs-sidebar-border);
+  }
+
+  [data-theme="dark"] .navbar-sidebar__brand {
+    background-color: #0d0d10 !important;
+  }
+
+  .navbar-sidebar__items {
+    overflow-y: auto;
+    height: calc(100% - var(--ifm-navbar-height));
+  }
+
+  .navbar-sidebar__item .menu {
+    background-color: var(--ifm-background-color) !important;
+    padding: 1rem 0.875rem 2rem;
+  }
+
+  [data-theme="dark"] .navbar-sidebar__item .menu {
+    background-color: #0d0d10 !important;
+  }
+
+  .navbar-overlay {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 299;
+  }
 }
 
 /* Caret arrow color */
