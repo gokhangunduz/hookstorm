@@ -6,6 +6,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ---
 
+## [1.0.1] — 2026-03-31
+
+### Maintenance
+
+- Updated devDependencies to latest stable: `@typescript-eslint/*` 8.58, `vitest` + `@vitest/coverage-v8` 4.x, `eslint-plugin-react-hooks` 7.x, `jsdom` 29.x, `release-it` 19.x
+- Disabled new `react-hooks/refs` and `react-hooks/set-state-in-effect` rules (v7) — patterns are intentional and documented
+- Fixed `vitest.config.ts` include pattern to prevent `dist/` test file false positives in vitest 4
+- Fixed `usePrefersTheme` test to use `vi.stubGlobal` instead of `vi.spyOn` for jsdom 29 compatibility
+
+---
+
 ## [1.0.0] — 2026-03-31
 
 First stable release. This version introduces a complete overhaul of the library's quality, tooling, and hook correctness.
