@@ -7,7 +7,7 @@ describe("usePrefersTheme", () => {
 
   const mockMatchMedia = (matches: boolean) => {
     listeners = [];
-    vi.spyOn(window, "matchMedia").mockReturnValue({
+    vi.stubGlobal("matchMedia", (_query: string) => ({
       matches,
       media: "(prefers-color-scheme: dark)",
       onchange: null,
@@ -16,7 +16,7 @@ describe("usePrefersTheme", () => {
       addEventListener: (_: string, fn: (e: MediaQueryListEvent) => void) => listeners.push(fn),
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
-    } as unknown as MediaQueryList);
+    }));
   };
 
   beforeEach(() => {

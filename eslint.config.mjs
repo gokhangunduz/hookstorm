@@ -33,6 +33,11 @@ export default [
       ...reactHooksPlugin.configs.recommended.rules,
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      // v7 introduced these rules but they flag intentional patterns:
+      // - "latest ref" (ref.current = value during render) is documented in React docs
+      // - setState in effect body is valid for early returns and initial value sync
+      "react-hooks/refs": "off",
+      "react-hooks/set-state-in-effect": "off",
     },
   },
   prettierConfig,
