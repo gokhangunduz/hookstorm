@@ -419,6 +419,10 @@
   margin-bottom: 2.5rem;
 }
 
+.footer__col {
+  min-width: 0;
+}
+
 .footer__title {
   font-size: 0.7rem !important;
   font-weight: 700 !important;
@@ -454,6 +458,32 @@
   padding-top: 1.5rem;
   text-align: center;
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 996px) {
+  .footer {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+
+  .footer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer__col {
+    padding: 0;
+  }
+
+  .footer__title {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .footer__copyright {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+  }
 }
 
 /* ──────────────────────────────── Pagination */
