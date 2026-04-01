@@ -103,6 +103,10 @@ function App() {
 | [`useDocumentTitle`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useDocumentTitle) | Dynamically update the browser tab title |
 | [`useLockScroll`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useLockScroll) | Prevent or restore page scroll — safe for multiple instances |
 | [`useKeyPress`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useKeyPress) | Detect when a specific key is held down |
+| [`useEventListener`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useEventListener) | Attach an event listener to window or any element |
+| [`useMediaQuery`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useMediaQuery) | Track whether a CSS media query matches |
+| [`useIntersectionObserver`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useIntersectionObserver) | Detect when an element enters or leaves the viewport |
+| [`useResizeObserver`](https://gokhangunduz.github.io/hookstorm/docs/hooks/useResizeObserver) | Track the dimensions of a DOM element |
 
 ### Storage
 
@@ -261,7 +265,7 @@ function App() {
 | **TypeScript first** | Every hook is fully typed with exported return types |
 | **Tree-shakeable** | `"sideEffects": false` — bundlers only ship what you import |
 | **SSR safe** | All browser APIs are guarded for Next.js and Remix |
-| **Battle-tested** | 115 tests across 26 test files, 97%+ source coverage |
+| **Battle-tested** | 139 tests across 30 test files, 97%+ source coverage |
 | **MIT licensed** | Free for personal and commercial use |
 
 ---

@@ -28,12 +28,12 @@ Import only what you use. Modern bundlers (Vite, webpack, Rollup) automatically 
 
 ## What's Included
 
-Hookstorm currently ships **22+ hooks** grouped by purpose:
+Hookstorm currently ships **30 hooks** grouped by purpose:
 
 | Category | Hooks |
 |---|---|
 | **UI State** | `useToggle`, `useCounter`, `useDebounce`, `usePrevious` |
-| **DOM & Browser** | `useWindowSize`, `useScrollPosition`, `useMousePosition`, `useHover`, `useClickOutside`, `useDocumentTitle`, `useLockScroll`, `useKeyPress` |
+| **DOM & Browser** | `useWindowSize`, `useScrollPosition`, `useMousePosition`, `useHover`, `useClickOutside`, `useDocumentTitle`, `useLockScroll`, `useKeyPress`, `useEventListener`, `useMediaQuery`, `useIntersectionObserver`, `useResizeObserver` |
 | **Storage** | `useLocalStorage`, `useSessionStorage`, `useCookie` |
 | **Network & Device** | `useOnlineStatus`, `useGeoLocation`, `usePageVisibility`, `usePrefersTheme` |
 | **Timers & Lifecycle** | `useCountdown`, `useIdle` |

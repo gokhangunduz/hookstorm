@@ -40,7 +40,7 @@ export default function Home(): ReactElement {
         <div className="container">
           <div className={styles.heroBadge}>
             <span className={styles.badgeDot} />
-            22+ Hooks &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; MIT License
+            30+ Hooks &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; MIT License
           </div>
 
           <h1 className={styles.heroTitle}>
