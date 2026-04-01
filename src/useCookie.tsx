@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface UseCookieReturn {
   value: string | null;
@@ -13,9 +13,22 @@ interface CookieOptions {
   secure?: boolean;
 }
 
+const readCookieByKey = (key: string): string | null => {
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${encodeURIComponent(key)}=`));
+  if (!match) return null;
+  try {
+    return decodeURIComponent(match.split("=").slice(1).join("="));
+  } catch {
+    return null;
+  }
+};
+
 /**
  * A custom hook to manage a cookie.
  * Values are automatically URL-encoded/decoded to handle special characters safely.
+ * Syncs with external cookie changes when the window regains focus.
  *
  * @param key - The key of the cookie.
  * @param initialValue - The initial value to use if no cookie is found.
@@ -37,21 +50,15 @@ interface CookieOptions {
  * );
  */
 const useCookie = (key: string, initialValue: string): UseCookieReturn => {
-  const readCookie = (): string | null => {
-    const match = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${encodeURIComponent(key)}=`));
-    if (!match) return null;
-    try {
-      return decodeURIComponent(match.split("=").slice(1).join("="));
-    } catch {
-      return null;
-    }
-  };
-
-  const [value, setValue] = useState<string | null>(
-    () => readCookie() ?? initialValue
+  const [value, setRawValue] = useState<string | null>(
+    () => readCookieByKey(key) ?? initialValue
   );
+
+  useEffect(() => {
+    const sync = () => setRawValue(readCookieByKey(key) ?? initialValue);
+    window.addEventListener("focus", sync);
+    return () => window.removeEventListener("focus", sync);
+  }, [key, initialValue]);
 
   const setCookie = (newValue: string, options: CookieOptions = {}): void => {
     let cookieString = `${encodeURIComponent(key)}=${encodeURIComponent(newValue)}`;
@@ -68,12 +75,12 @@ const useCookie = (key: string, initialValue: string): UseCookieReturn => {
     if (options.secure) cookieString += `; Secure`;
 
     document.cookie = cookieString;
-    setValue(newValue);
+    setRawValue(newValue);
   };
 
   const removeCookie = (options: CookieOptions = {}): void => {
     setCookie("", { ...options, expires: -1 });
-    setValue(null);
+    setRawValue(null);
   };
 
   return { value, setValue: setCookie, removeValue: removeCookie };

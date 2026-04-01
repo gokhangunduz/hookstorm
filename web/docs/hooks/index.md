@@ -27,6 +27,10 @@ Browse all available hooks in Hookstorm, organized by category.
 | [useDocumentTitle](/docs/hooks/useDocumentTitle) | Dynamically update the browser tab title |
 | [useLockScroll](/docs/hooks/useLockScroll) | Prevent or restore page scroll |
 | [useKeyPress](/docs/hooks/useKeyPress) | Detect when a specific key is held down |
+| [useEventListener](/docs/hooks/useEventListener) | Attach an event listener to window or any element |
+| [useMediaQuery](/docs/hooks/useMediaQuery) | Track whether a CSS media query matches |
+| [useIntersectionObserver](/docs/hooks/useIntersectionObserver) | Detect when an element enters or leaves the viewport |
+| [useResizeObserver](/docs/hooks/useResizeObserver) | Track the dimensions of a DOM element |
 
 ## Storage
 

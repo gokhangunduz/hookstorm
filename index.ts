@@ -4,14 +4,18 @@ import useCopyToClipboard from "./src/useCopyToClipboard";
 import useCountdown from "./src/useCountdown";
 import useCounter from "./src/useCounter";
 import useDocumentTitle from "./src/useDocumentTitle";
+import useEventListener from "./src/useEventListener";
 import useHover from "./src/useHover";
 import useInterval from "./src/useInterval";
+import useIntersectionObserver from "./src/useIntersectionObserver";
 import useKeyPress from "./src/useKeyPress";
 import useLocalStorage from "./src/useLocalStorage";
 import useLockScroll from "./src/useLockScroll";
+import useMediaQuery from "./src/useMediaQuery";
 import useMounted from "./src/useMounted";
 import usePrefersTheme from "./src/usePrefersTheme";
 import usePrevious from "./src/usePrevious";
+import useResizeObserver from "./src/useResizeObserver";
 import useScrollPosition from "./src/useScrollPosition";
 import useSessionStorage from "./src/useSessionStorage";
 import useTimeout from "./src/useTimeout";
@@ -32,10 +36,14 @@ export type { UseCountdownReturn } from "./src/useCountdown";
 export type { UseCounterReturn } from "./src/useCounter";
 export type { UseDocumentTitleReturn } from "./src/useDocumentTitle";
 export type { UseHoverReturn } from "./src/useHover";
+export type { UseIntersectionObserverReturn } from "./src/useIntersectionObserver";
 export type { UseKeyPressReturn } from "./src/useKeyPress";
 export type { UseLocalStorageReturn } from "./src/useLocalStorage";
 export type { UseLockScrollReturn } from "./src/useLockScroll";
+export type { UseMediaQueryReturn } from "./src/useMediaQuery";
+export type { UseMountedReturn } from "./src/useMounted";
 export type { UsePrefersThemeReturn } from "./src/usePrefersTheme";
+export type { UseResizeObserverReturn } from "./src/useResizeObserver";
 export type { UseSessionStorageReturn } from "./src/useSessionStorage";
 export type { UseTimeoutReturn } from "./src/useTimeout";
 export type { UseToggleReturn } from "./src/useToggle";
@@ -55,14 +63,18 @@ export {
   useCountdown,
   useCounter,
   useDocumentTitle,
+  useEventListener,
   useHover,
   useInterval,
+  useIntersectionObserver,
   useKeyPress,
   useLocalStorage,
   useLockScroll,
+  useMediaQuery,
   useMounted,
   usePrefersTheme,
   usePrevious,
+  useResizeObserver,
   useScrollPosition,
   useSessionStorage,
   useTimeout,

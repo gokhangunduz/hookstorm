@@ -40,4 +40,16 @@ describe("useCookie", () => {
     act(() => result.current.setValue("value"));
     expect(result.current.value).toBe("value");
   });
+
+  it("syncs value when window gains focus after external change", () => {
+    const { result } = renderHook(() => useCookie("test-key", "default"));
+
+    document.cookie = `${encodeURIComponent("test-key")}=${encodeURIComponent("external-value")}`;
+
+    act(() => {
+      window.dispatchEvent(new Event("focus"));
+    });
+
+    expect(result.current.value).toBe("external-value");
+  });
 });

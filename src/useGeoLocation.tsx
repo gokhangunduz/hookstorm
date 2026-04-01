@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface UseGeoLocationReturn {
   latitude: number | null;
@@ -33,6 +33,9 @@ interface GeoLocationOptions {
  * return <p>Location: {latitude}, {longitude}</p>;
  */
 const useGeoLocation = (options: GeoLocationOptions = {}): UseGeoLocationReturn => {
+  const optionsRef = useRef(options);
+  optionsRef.current = options;
+
   const [location, setLocation] = useState<UseGeoLocationReturn>({
     latitude: null,
     longitude: null,
@@ -65,9 +68,9 @@ const useGeoLocation = (options: GeoLocationOptions = {}): UseGeoLocationReturn 
         }
       },
       {
-        enableHighAccuracy: options.enableHighAccuracy ?? false,
-        timeout: options.timeout ?? 10000,
-        maximumAge: options.maximumAge ?? 0,
+        enableHighAccuracy: optionsRef.current.enableHighAccuracy ?? false,
+        timeout: optionsRef.current.timeout ?? 10000,
+        maximumAge: optionsRef.current.maximumAge ?? 0,
       }
     );
 

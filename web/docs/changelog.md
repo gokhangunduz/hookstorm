@@ -8,6 +8,27 @@ All notable changes to Hookstorm are documented here.
 
 ---
 
+## v1.1.0 — 2026-04-01
+
+### New Hooks
+
+| Hook | Description |
+|------|-------------|
+| [`useIntersectionObserver`](/docs/hooks/useIntersectionObserver) | Detect when an element enters or leaves the viewport |
+| [`useMediaQuery`](/docs/hooks/useMediaQuery) | Track whether a CSS media query matches |
+| [`useEventListener`](/docs/hooks/useEventListener) | Attach an event listener to window or any element |
+| [`useResizeObserver`](/docs/hooks/useResizeObserver) | Track the dimensions of a DOM element |
+
+### Improvements
+
+| Area | Change |
+|------|--------|
+| `useCookie` | Syncs state when the window regains focus — picks up cookie changes made in other tabs |
+| `useGeoLocation` | Options are read via a ref inside the effect — prevents stale option values if the object reference changes between renders |
+| `useMounted` | Exports `UseMountedReturn` type alias for consistency with the rest of the library |
+
+---
+
 ## v1.0.1 — 2026-03-31
 
 ### Maintenance

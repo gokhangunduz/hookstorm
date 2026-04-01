@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type RefObject } from "react";
+
+export type UseMountedReturn = RefObject<boolean>;
 
 /**
  * A custom hook that returns whether the component is currently mounted.
@@ -15,7 +17,7 @@ import { useEffect, useRef } from "react";
  *   });
  * }, []);
  */
-const useMounted = (): React.RefObject<boolean> => {
+const useMounted = (): UseMountedReturn => {
   const isMounted = useRef<boolean>(false);
 
   useEffect(() => {
